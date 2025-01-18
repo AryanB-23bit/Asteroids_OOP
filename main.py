@@ -8,6 +8,8 @@ from shot import Shot
 
 
 def main():
+    sim_over = False
+
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     clock = pygame.time.Clock()
@@ -38,8 +40,11 @@ def main():
 
         for asteroid in asteroids:
             if asteroid.collides_with(player):
-                print("Game over!")
-                sys.exit()
+                player.kill()
+                [shot.kill() for shot in shots]
+                [asteroid.kill() for asteroid in asteroids]
+                asteroid_field.kill()
+                sim_over = True
 
             for shot in shots:
                 if shot.collides_with(asteroid):
@@ -50,6 +55,16 @@ def main():
 
         for obj in drawable:
             obj.draw(screen)
+
+        if sim_over:
+            font = pygame.font.Font(None, 200)
+            text_surface = font.render("SIM OVER", True, 'white')
+            text_rect = text_surface.get_rect()
+            text_rect.center = (SCREEN_WIDTH//2, SCREEN_HEIGHT//2)
+            bg_rect = text_rect.copy()
+            bg_rect.inflate_ip(20, 20)
+            pygame.draw.rect(screen, 'white', bg_rect, 2)  # White outline
+            screen.blit(text_surface, text_rect)
 
         pygame.display.flip()
 
