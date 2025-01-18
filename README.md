@@ -1,5 +1,4 @@
 Some basic Asteroid and Ship pygame sim
 
 
-https://github.com/user-attachments/assets/0ff3d54b-8599-4f76-a302-2f511b514434
-
+![sim](https://github.com/user-attachments/assets/77c45890-e2cd-4891-9340-67aebc1c2d8e)
